@@ -73,4 +73,8 @@ import Foundation
 
 //LinkList().test()
 
-JZ().test()
+//JZ().test()
+
+var arr = [100,4,200,1,3,2]
+Sort().quickSort(&arr, 0, arr.count - 1)
+print("快速排序:\(arr)")

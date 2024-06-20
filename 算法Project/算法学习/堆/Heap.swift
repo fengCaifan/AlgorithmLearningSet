@@ -69,6 +69,37 @@ class Heap {
             siftDown(&arr, 0, arr.count)
         }
     }
-    
-    
+}
+
+extension Heap {
+    func buildHeap(_ arr: [Int]) {
+        func shitDown(arr: inout [Int], index: Int, size: Int) {
+            let element = arr[index]
+            var index = index
+            while index < size / 2 { // size / 2是非叶子节点的个数，所以index要小鱼这个数
+                var childIndex = index * 2 + 1
+                var child = arr[childIndex]
+                let rightIndex = childIndex + 1
+                // 小顶堆，取左右最小的子节点
+                if rightIndex < size && arr[rightIndex] < child {
+                    childIndex = rightIndex
+                    child = arr[rightIndex]
+                }
+                
+                // 当前节点比子节点中最小的还要小，就不用交换，否则要交换
+                guard element > child else { return }
+                arr[index] = child
+                index = childIndex
+            }
+            arr[index] = element
+        }
+        guard arr.count > 0 else { return }
+        var array = arr
+        var index = array.count / 2 - 1 // 从第一个非叶子节点开始下滤建堆
+        while index >= 0 {
+            shitDown(arr: &array, index: index, size: array.count)
+            index -= 1
+        }
+        print(array)
+    }
 }

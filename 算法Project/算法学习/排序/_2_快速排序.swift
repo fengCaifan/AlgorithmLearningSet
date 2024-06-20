@@ -22,7 +22,7 @@ extension Sort {
      注意：这里的right是闭区间，是一个真实的下标
      */
     func quickSort(_ arr:inout [Int],_ left:Int, _ right:Int) {
-        if left > right {
+        if left >= right {
             return
         }
         var l = left
@@ -30,11 +30,11 @@ extension Sort {
         let temp = arr[left]
         while l < r {
             //先从右往左查找, 找到小于基准数的值
-            while l < r && arr[r] > temp  {
+            while l < r && arr[r] >= temp  {
                 r -= 1
             }
             //再从左往右查找，找到大于基准数
-            while l < r && arr[l] < temp {
+            while l < r && arr[l] <= temp {
                 l += 1
             }
             if l < r {
@@ -46,7 +46,7 @@ extension Sort {
         
         arr[left] = arr[l]
         arr[l] = temp
-        quickSort(&arr, left, r-1)
-        quickSort(&arr, r + 1, right)
+        quickSort(&arr, left, l - 1)
+        quickSort(&arr, l + 1, right)
     }
 }
